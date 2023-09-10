@@ -23,6 +23,10 @@ public class LessonRegistService {
 	 * @param　lessonId
 	 */
 	public void registerLesson(Integer studentId, Integer lessonId) {
+		boolean isExists = studentLessonDao.findByStudentIdLessonId(studentId, lessonId);
+		if (isExists) {
+			return;
+		}
 		StudentLesson studentLesson = new StudentLesson(studentId, lessonId);
 		studentLessonDao.insert(studentLesson);
 	}
